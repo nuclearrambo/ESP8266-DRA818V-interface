@@ -3,8 +3,8 @@
 #include <ESP8266WebServer.h>
 #include <ESP8266mDNS.h>
 
-const char* ssid = "Tembe";
-const char* password = "salil24302199";
+const char* ssid = "...";
+const char* password = "...";
 String frequency = String("");
 String squelch = String("");
 ESP8266WebServer server(80);
