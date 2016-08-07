@@ -3,8 +3,8 @@
 #include <ESP8266WebServer.h>
 #include <ESP8266mDNS.h>
 
-const char* ssid = "...";
-const char* password = "...";
+const char* ssid = "HAM_NODE";
+const char* password = "";
 String frequency = String("");
 String squelch = String("");
 ESP8266WebServer server(80);
@@ -111,19 +111,18 @@ void setup(void){
   pinMode(led, OUTPUT);
   digitalWrite(led, 0);
   Serial.begin(9600);
-  WiFi.begin(ssid, password);
+  IPAddress ip(192,168,1,35);
+  IPAddress subnet(255,255,255,0);
+  
+  WiFi.softAP(ssid, password);
+  WiFi.softAPConfig(ip, ip, subnet);
   Serial.println("");
 
-  // Wait for connection
-  while (WiFi.status() != WL_CONNECTED) {
-    delay(500);
-    Serial.print(".");
-  }
   Serial.println("");
   Serial.print("Connected to ");
   Serial.println(ssid);
   Serial.print("IP address: ");
-  Serial.println(WiFi.localIP());
+  Serial.println(WiFi.softAPIP());
 
   if (MDNS.begin("esp8266")) {
     Serial.println("MDNS responder started");
